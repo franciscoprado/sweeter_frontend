@@ -4,8 +4,7 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="">Home</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item routerLink="/buscar">Busca</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -15,11 +14,14 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       }
-      <span>angular-docker</span>
+      <span>Sweeter</span>
     </mat-toolbar>
 
     <!-- Add Content Here -->
-    <router-outlet></router-outlet>
+
+    <section>
+      <router-outlet></router-outlet>
+    </section>
 
   </mat-sidenav-content>
 </mat-sidenav-container>

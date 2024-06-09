@@ -14,9 +14,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { PostComponent } from './componentes/post/post.component';
 import { HomeComponent } from './paginas/home/home.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [AppComponent, NavegacaoComponent, PostComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    NavegacaoComponent,
+    PostComponent,
+    HomeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,8 +33,9 @@ import { HomeComponent } from './paginas/home/home.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    ReactiveFormsModule,
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [provideAnimationsAsync(), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

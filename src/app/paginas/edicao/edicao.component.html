@@ -1,1 +1,23 @@
-<p>edicao works!</p>
+<form [formGroup]="profileForm" (ngSubmit)="salvarEdicao()">
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="titulo" value="">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Subtítulo</mat-label>
+            <input matInput formControlName="subtitulo" value="">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Texto</mat-label>
+            <textarea matInput formControlName="texto"></textarea>
+        </mat-form-field>
+    </p>
+    <p>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!profileForm.valid">Enviar</button>
+    </p>
+</form>
