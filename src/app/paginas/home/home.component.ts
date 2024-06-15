@@ -9,6 +9,7 @@ import { Postagem, Postagens } from 'src/app/tipos';
 })
 export class HomeComponent implements OnInit {
   postagens: Postagem[] = [];
+  semPostagens: boolean = false;
 
   constructor(private postagemServico: PostagemService) {}
 
@@ -16,8 +17,10 @@ export class HomeComponent implements OnInit {
     this.postagemServico.obterPostagens().subscribe({
       next: (data: Postagens) => {
         this.postagens = data.postagens;
+        this.semPostagens = false;
       },
       error: (err) => {
+        this.semPostagens = true;
         console.error(err.message);
       },
     });

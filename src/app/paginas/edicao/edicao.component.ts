@@ -3,9 +3,10 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostagemService } from 'src/app/servicos/postagem.service';
 import { Postagem } from 'src/app/tipos';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edicao',
@@ -24,7 +25,9 @@ export class EdicaoComponent implements OnInit {
   postagem: Postagem | undefined;
   constructor(
     private postagemServico: PostagemService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -53,9 +56,12 @@ export class EdicaoComponent implements OnInit {
     formData.append('titulo', this.postForm.get('titulo')?.value ?? '');
     formData.append('subtitulo', this.postForm.get('subtitulo')?.value ?? '');
     formData.append('texto', this.postForm.get('texto')?.value ?? '');
-    
+
     this.postagemServico.editarPostagem(formData).subscribe({
-      next: (data: Postagem) => {},
+      next: (data: Postagem) => {
+        this.snackBar.open('Postagem salva com sucesso.', 'Fechar');
+        this.router.navigate([`post/${postId}`]);
+      },
       error: (err) => {
         console.log(err);
       },
