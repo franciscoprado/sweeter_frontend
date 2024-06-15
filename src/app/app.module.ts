@@ -15,9 +15,15 @@ import { MatListModule } from '@angular/material/list';
 import { PostComponent } from './componentes/post/post.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatFormField,
+  MatLabel,
+} from '@angular/material/form-field';
 import { provideHttpClient } from '@angular/common/http';
 import { VisualizacaoComponent } from './paginas/visualizacao/visualizacao.component';
+import { BuscaComponent } from './paginas/busca/busca.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -26,6 +32,7 @@ import { VisualizacaoComponent } from './paginas/visualizacao/visualizacao.compo
     PostComponent,
     HomeComponent,
     VisualizacaoComponent,
+    BuscaComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,10 +44,18 @@ import { VisualizacaoComponent } from './paginas/visualizacao/visualizacao.compo
     MatIconModule,
     MatListModule,
     ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInputModule
   ],
   providers: [
     provideHttpClient(),
-    provideAnimationsAsync(), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
+    provideAnimationsAsync(),
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

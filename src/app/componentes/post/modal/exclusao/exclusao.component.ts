@@ -53,7 +53,7 @@ export class ExclusaoComponent {
         this.parent.removerItem(this.postId);
         this.router.navigate(['/']);
         this.dialogRef.close();
-        this.snackBar.open(data.mensagem, 'Fechar');
+        this.snackBar.open(data.mensagem, 'Fechar', { duration: 3000 });
       },
       error: (err) => {
         console.error(err.message);

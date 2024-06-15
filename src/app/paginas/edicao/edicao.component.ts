@@ -59,7 +59,9 @@ export class EdicaoComponent implements OnInit {
 
     this.postagemServico.editarPostagem(formData).subscribe({
       next: (data: Postagem) => {
-        this.snackBar.open('Postagem salva com sucesso.', 'Fechar');
+        this.snackBar.open('Postagem salva com sucesso.', 'Fechar', {
+          duration: 3000,
+        });
         this.router.navigate(['post', postId]);
       },
       error: (err) => {
