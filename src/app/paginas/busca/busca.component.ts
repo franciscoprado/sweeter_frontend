@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PostagemService } from 'src/app/servicos/postagem.service';
 import { Postagem, Postagens } from 'src/app/tipos';
 
@@ -15,23 +16,48 @@ import { Postagem, Postagens } from 'src/app/tipos';
   templateUrl: './busca.component.html',
   styleUrl: './busca.component.scss',
 })
-export class BuscaComponent {
+export class BuscaComponent implements OnInit {
   buscaForm = new FormGroup({
     busca: new FormControl('', Validators.required),
   });
   postagens: Postagem[] = [];
   semPostagens: boolean = false;
 
-  constructor(public postagemServico: PostagemService) {}
+  constructor(
+    public postagemServico: PostagemService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-  buscarTermo() {
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      const termo = params['termo'];
+
+      if (termo) {
+        this.buscarTermo(termo);
+        return;
+      }
+    });
+
     this.postagens = [];
-    const termo: string = this.buscaForm.value.busca ?? '';
+  }
 
-    if (!termo) return;
+  buscarTermo(termo: string = '') {
+    this.postagens = [];
+
+    if (!termo) {
+      termo = this.buscaForm.value.busca ?? '';
+    }
 
     this.postagemServico.buscarPostagens(termo).subscribe({
       next: (data: Postagens) => {
+        const queryParams: Params = { termo: termo };
+
+        this.router.navigate([], {
+          relativeTo: this.activatedRoute,
+          queryParams,
+          queryParamsHandling: 'merge', // remove to replace all query params by provided
+        });
         this.postagens = data.postagens;
         this.semPostagens = false;
       },
