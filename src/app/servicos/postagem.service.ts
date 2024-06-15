@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Postagem, Postagens } from '../tipos';
+import { Mensagem, Postagem, Postagens } from '../tipos';
 
 @Injectable({
   providedIn: 'root',
@@ -19,12 +19,18 @@ export class PostagemService {
     );
   }
 
-  editarPostagem(postagem: any): Observable<any> {
+  editarPostagem(postagem: FormData): Observable<Postagem> {
     let httpParams = new HttpHeaders();
     httpParams = httpParams.set('Content-Type', 'multipart/form-data');
-    return this.http.put<any>(
+    return this.http.put<Postagem>(
       `http://172.19.166.134:5000/postagem`,
       postagem
+    );
+  }
+
+  excluirPostagem(postId: number): Observable<Mensagem> {
+    return this.http.delete<Mensagem>(
+      `http://172.19.166.134:5000/postagem?id=${postId}`
     );
   }
 }

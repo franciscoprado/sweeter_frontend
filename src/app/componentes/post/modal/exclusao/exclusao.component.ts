@@ -8,6 +8,9 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { PostagemService } from 'src/app/servicos/postagem.service';
+import { Mensagem, Postagem } from 'src/app/tipos';
+import { PostComponent } from '../../post.component';
 
 @Component({
   selector: 'app-exclusao',
@@ -23,10 +26,28 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './exclusao.component.scss',
 })
 export class ExclusaoComponent {
+  postId: number | undefined;
+
   constructor(
     public dialogRef: MatDialogRef<ExclusaoComponent>,
+    public postagemServico: PostagemService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(data)
+    this.postId = data.postId;
+  }
+
+  removerPostagem() {
+    if (!this.postId) {
+      return;
+    }
+  
+    this.postagemServico.excluirPostagem(this.postId).subscribe({
+      next: (data: Mensagem) => {
+        let mensagem: Mensagem = data;
+      },
+      error: (err) => {
+        console.error(err.message);
+      },
+    });
   }
 }

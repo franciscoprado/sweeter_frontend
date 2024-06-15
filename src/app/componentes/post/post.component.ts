@@ -16,11 +16,9 @@ export class PostComponent {
 
   constructor(public dialog: MatDialog) {}
 
-  excluirPost(postId: number): void {
+  excluirPost(postId: number = 0): void {
     this.dialog.open(ExclusaoComponent, {
       data: { postId: postId },
     });
   }
-
-  verPost(postId: number): void {}
 }

@@ -10,3 +10,7 @@ export interface Postagem {
 export interface Postagens {
   postagens: Postagem[];
 }
+
+export interface Mensagem {
+  mensagem: any;
+}
