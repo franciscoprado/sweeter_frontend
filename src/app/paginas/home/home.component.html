@@ -1,5 +1,5 @@
 <div *ngFor="let postagem of postagens">
-    <app-post [id]="postagem.id" [titulo]="postagem.titulo" [subtitulo]="postagem.subtitulo" [texto]="postagem.texto" [abreviar]="true"></app-post>
+    <app-post (removerItemEvento)="removerItemDaLista($event)" [id]="postagem.id" [titulo]="postagem.titulo" [subtitulo]="postagem.subtitulo" [texto]="postagem.texto" [abreviar]="true"></app-post>
 </div>
 <div *ngIf="postagens.length === 0">
     <p>Nenhuma postagem encontrada.</p>

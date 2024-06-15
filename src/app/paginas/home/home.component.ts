@@ -22,4 +22,9 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+
+  removerItemDaLista(postId: number) {
+    let lista = this.postagens.filter((item) => item.id != postId);
+    this.postagens = lista;
+  }
 }

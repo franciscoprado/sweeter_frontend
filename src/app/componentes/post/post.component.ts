@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ExclusaoComponent } from './modal/exclusao/exclusao.component';
 
@@ -8,6 +8,7 @@ import { ExclusaoComponent } from './modal/exclusao/exclusao.component';
   styleUrl: './post.component.scss',
 })
 export class PostComponent {
+  @Output() removerItemEvento = new EventEmitter<number>();
   @Input('id') id: number | undefined;
   @Input('titulo') titulo: string | undefined;
   @Input('subtitulo') subtitulo: string | undefined;
@@ -18,7 +19,11 @@ export class PostComponent {
 
   excluirPost(postId: number = 0): void {
     this.dialog.open(ExclusaoComponent, {
-      data: { postId: postId },
+      data: { postId: postId, parent: this },
     });
+  }
+  
+  removerItem(postId: number | undefined) {
+    this.removerItemEvento.emit(postId);
   }
 }

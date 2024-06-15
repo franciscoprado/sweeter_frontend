@@ -27,6 +27,7 @@ import { PostComponent } from '../../post.component';
 })
 export class ExclusaoComponent {
   postId: number | undefined;
+  parent: PostComponent;
 
   constructor(
     public dialogRef: MatDialogRef<ExclusaoComponent>,
@@ -34,6 +35,7 @@ export class ExclusaoComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.postId = data.postId;
+    this.parent = data.parent;
   }
 
   removerPostagem() {
@@ -44,6 +46,8 @@ export class ExclusaoComponent {
     this.postagemServico.excluirPostagem(this.postId).subscribe({
       next: (data: Mensagem) => {
         let mensagem: Mensagem = data;
+        this.parent.removerItem(this.postId);
+        this.dialogRef.close();
       },
       error: (err) => {
         console.error(err.message);
