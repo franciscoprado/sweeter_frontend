@@ -1,0 +1,23 @@
+<form enctype="multipart/form-data" [formGroup]="postForm" (ngSubmit)="salvarEdicao()">
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="titulo" value="titulo">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Subtítulo</mat-label>
+            <input matInput formControlName="subtitulo" value="subtitulo">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Texto</mat-label>
+            <textarea matInput formControlName="texto" rows="8"></textarea>
+        </mat-form-field>
+    </p>
+    <p>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!postForm.valid">Enviar</button>
+    </p>
+</form>

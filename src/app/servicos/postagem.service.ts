@@ -35,4 +35,10 @@ export class PostagemService {
       `${environment.url}/busca_postagem?termo=${termo}`
     );
   }
+
+  criarPostagem(postagem: FormData): Observable<Postagem> {
+    let httpParams = new HttpHeaders();
+    httpParams = httpParams.set('Content-Type', 'multipart/form-data');
+    return this.http.post<Postagem>(`${environment.url}/postagem`, postagem);
+  }
 }

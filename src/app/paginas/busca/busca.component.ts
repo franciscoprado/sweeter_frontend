@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PostagemService } from 'src/app/servicos/postagem.service';
 import { Postagem, Postagens } from 'src/app/tipos';
@@ -59,7 +52,7 @@ export class BuscaComponent implements OnInit {
           queryParamsHandling: 'merge', // remove to replace all query params by provided
         });
         this.postagens = data.postagens;
-        this.semPostagens = false;
+        this.semPostagens = this.postagens.length === 0;
       },
       error: (err) => {
         console.error(err.message);

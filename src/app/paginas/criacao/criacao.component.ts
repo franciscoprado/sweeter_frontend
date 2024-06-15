@@ -1,52 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostagemService } from 'src/app/servicos/postagem.service';
 import { Postagem } from 'src/app/tipos';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-edicao',
-  templateUrl: './edicao.component.html',
-  styleUrl: './edicao.component.scss',
-  imports: [ReactiveFormsModule, MatInputModule, MatButton],
+  selector: 'app-criacao',
   standalone: true,
+  imports: [ReactiveFormsModule, MatInputModule, MatButton],
+  templateUrl: './criacao.component.html',
+  styleUrl: './criacao.component.scss',
 })
-export class EdicaoComponent implements OnInit {
+export class CriacaoComponent {
   postForm = new FormGroup({
     titulo: new FormControl('', Validators.required),
     subtitulo: new FormControl(''),
     texto: new FormControl('', Validators.required),
   });
-  postagem: Postagem | undefined;
-  
+
   constructor(
     private postagemServico: PostagemService,
     private route: ActivatedRoute,
     private router: Router,
     public snackBar: MatSnackBar
   ) {}
-
-  ngOnInit(): void {
-    const postId = this.route.snapshot.params['postId'];
-
-    this.postagemServico.obterPostagem(parseInt(postId)).subscribe({
-      next: (data: Postagem) => {
-        let postagem: Postagem = data;
-        this.postForm.setValue({
-          titulo: postagem.titulo,
-          subtitulo: postagem.subtitulo,
-          texto: postagem.texto,
-        });
-      },
-      error: (err) => {
-        console.error(err.message);
-      },
-    });
-  }
 
   salvarEdicao() {
     const postId = this.route.snapshot.params['postId'];
@@ -57,12 +37,12 @@ export class EdicaoComponent implements OnInit {
     formData.append('subtitulo', this.postForm.get('subtitulo')?.value ?? '');
     formData.append('texto', this.postForm.get('texto')?.value ?? '');
 
-    this.postagemServico.editarPostagem(formData).subscribe({
+    this.postagemServico.criarPostagem(formData).subscribe({
       next: (data: Postagem) => {
-        this.snackBar.open('Postagem salva com sucesso.', 'Fechar', {
+        this.snackBar.open('Postagem criada com sucesso.', 'Fechar', {
           duration: 3000,
         });
-        this.router.navigate(['post', postId]);
+        this.router.navigate(['post', data.id]);
       },
       error: (err) => {
         console.log(err);
