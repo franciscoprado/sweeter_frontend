@@ -1,1 +1,6 @@
-<app-post></app-post>
+<div *ngFor="let postagem of postagens">
+    <app-post [id]="postagem.id" [titulo]="postagem.titulo" [subtitulo]="postagem.subtitulo" [texto]="postagem.texto" [abreviar]="true"></app-post>
+</div>
+<div *ngIf="postagens.length === 0">
+    <p>Nenhuma postagem encontrada.</p>
+</div>

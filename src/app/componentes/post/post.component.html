@@ -1,12 +1,12 @@
 <mat-card class="card">
     <mat-card-header>
         <mat-card-title-group>
-            <mat-card-title [routerLink]="['/post', '1']">{{ titulo }}</mat-card-title>
-            <mat-card-subtitle [routerLink]="['/post', '1']">{{ subtitulo }}</mat-card-subtitle>
+            <mat-card-title [routerLink]="['/post', id]">{{ titulo }}</mat-card-title>
+            <mat-card-subtitle [routerLink]="['/post', id]">{{ subtitulo }}</mat-card-subtitle>
         </mat-card-title-group>
     </mat-card-header>
-    <mat-card-content [routerLink]="['/post', '1']">
-        {{texto}}
+    <mat-card-content [routerLink]="['/post', id]">
+        {{ (abreviar && texto!!.length > 150) ? (texto | slice:0:150) + '...' : (texto) }}
     </mat-card-content>
     <mat-card-actions>
         <button mat-icon-button aria-label="Reply">
@@ -15,7 +15,7 @@
         <button mat-icon-button aria-label="Like">
             <mat-icon>favorite</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Edit" [routerLink]="['/editar', 1]">
+        <button mat-icon-button aria-label="Edit" [routerLink]="['/editar', id]">
             <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button aria-label="Delete" (click)="excluirPost(1)">

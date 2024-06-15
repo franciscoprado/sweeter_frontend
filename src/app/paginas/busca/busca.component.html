@@ -1,1 +1,11 @@
-<p>busca works!</p>
+<form [formGroup]="buscaForm" (ngSubmit)="buscarTermo()">
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Busca</mat-label>
+            <input matInput formControlName="busca" placeholder="Digite aqui o que deseja buscar..." value="">
+        </mat-form-field>
+    </p>
+    <p>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!buscaForm.valid">Buscar</button>
+    </p>
+</form>

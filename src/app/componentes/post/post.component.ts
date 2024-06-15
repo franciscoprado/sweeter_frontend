@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ExclusaoComponent } from './modal/exclusao/exclusao.component';
 
@@ -8,9 +8,11 @@ import { ExclusaoComponent } from './modal/exclusao/exclusao.component';
   styleUrl: './post.component.scss',
 })
 export class PostComponent {
-  titulo = 'Título aqui';
-  subtitulo = 'Subtítulo aqui';
-  texto = `Texto de teste.`;
+  @Input('id') id: number | undefined;
+  @Input('titulo') titulo: string | undefined;
+  @Input('subtitulo') subtitulo: string | undefined;
+  @Input('texto') texto: string | undefined;
+  @Input('abreviar') abreviar: boolean = false;
 
   constructor(public dialog: MatDialog) {}
 
@@ -20,7 +22,5 @@ export class PostComponent {
     });
   }
 
-  verPost(postId: number): void {
-    
-  }
+  verPost(postId: number): void {}
 }
