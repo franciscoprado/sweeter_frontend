@@ -12,6 +12,7 @@ import { PostagemService } from 'src/app/servicos/postagem.service';
 import { Mensagem, Postagem } from 'src/app/tipos';
 import { PostComponent } from '../../post.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exclusao',
@@ -33,6 +34,7 @@ export class ExclusaoComponent {
   constructor(
     public dialogRef: MatDialogRef<ExclusaoComponent>,
     public snackBar: MatSnackBar,
+    private router: Router,
     public postagemServico: PostagemService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -49,6 +51,7 @@ export class ExclusaoComponent {
       next: (data: Mensagem) => {
         let mensagem: Mensagem = data;
         this.parent.removerItem(this.postId);
+        this.router.navigate(['/']);
         this.dialogRef.close();
         this.snackBar.open(data.mensagem, 'Fechar');
       },
