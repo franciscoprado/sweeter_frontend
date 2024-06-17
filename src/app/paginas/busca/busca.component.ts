@@ -30,14 +30,14 @@ export class BuscaComponent implements OnInit {
     this.termo = '';
     this.activatedRoute.queryParams.subscribe((params) => {
       this.termo = params['termo'];
-
+      this.postagens = [];
+      
       if (this.termo && !this.carregando) {
-        this.postagens = [];
         this.buscarTermo();
         return;
       }
 
-      this.postagens = [];
+      this.termo = '';
     });
   }
 
