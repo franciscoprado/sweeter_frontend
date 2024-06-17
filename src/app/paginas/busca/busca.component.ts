@@ -29,15 +29,14 @@ export class BuscaComponent implements OnInit {
   ngOnInit(): void {
     this.termo = '';
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.termo = params['termo'];
+      this.termo = params['termo'] ?? '';
       this.postagens = [];
-      
-      if (this.termo && !this.carregando) {
+
+      if (!this.termo) return;
+      if (!this.carregando) {
         this.buscarTermo();
         return;
       }
-
-      this.termo = '';
     });
   }
 
@@ -61,7 +60,7 @@ export class BuscaComponent implements OnInit {
       next: (data: Postagens) => {
         this.semMaisPostagens = data.postagens.length === 0;
         this.postagens.push(...data.postagens);
-        this.semPostagens = false;
+        this.semPostagens = this.postagens.length === 0;
         this.carregando = false;
       },
       error: (err) => {
