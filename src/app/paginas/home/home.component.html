@@ -1,6 +1,7 @@
 <div *ngFor="let postagem of postagens">
     <app-post (removerItemEvento)="removerItemDaLista($event)" [id]="postagem.id" [titulo]="postagem.titulo"
-        [subtitulo]="postagem.subtitulo" [texto]="postagem.texto" [abreviar]="true"></app-post>
+        [subtitulo]="postagem.subtitulo" [texto]="postagem.texto" [curtidas]="postagem.curtidas"
+        [data_insercao]="postagem.data_insercao" [abreviar]="true"></app-post>
 </div>
 <div *ngIf="semPostagens">
     <p>Nenhuma postagem encontrada.</p>
@@ -9,3 +10,7 @@
 <button id="adicionar" mat-fab color="primary" aria-label="Adicionar postagem" [routerLink]="['criar']">
     <mat-icon>edit</mat-icon>
 </button>
+
+<div class="spinner-container">
+    <mat-spinner role="progressbar" aria-label="progressbar" [style.display]="carregando ? 'block' : 'none'"></mat-spinner>
+</div>

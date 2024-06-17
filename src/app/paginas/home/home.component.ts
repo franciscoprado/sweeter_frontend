@@ -10,17 +10,29 @@ import { Postagem, Postagens } from 'src/app/tipos';
 export class HomeComponent implements OnInit {
   postagens: Postagem[] = [];
   semPostagens: boolean = false;
+  pagina: number = 1;
+  carregando: boolean = false;
+  semMaisPostagens: boolean = false;
 
   constructor(private postagemServico: PostagemService) {}
 
   ngOnInit(): void {
-    this.postagemServico.obterPostagens().subscribe({
+    this.carregarPostagens();
+  }
+
+  carregarPostagens() {
+    this.carregando = true;
+
+    this.postagemServico.obterPostagens(this.pagina).subscribe({
       next: (data: Postagens) => {
-        this.postagens = data.postagens;
+        this.semMaisPostagens = data.postagens.length === 0;
+        this.postagens.push(...data.postagens);
         this.semPostagens = false;
+        this.carregando = false;
       },
       error: (err) => {
         this.semPostagens = true;
+        this.carregando = false;
         console.error(err.message);
       },
     });
@@ -29,5 +41,12 @@ export class HomeComponent implements OnInit {
   removerItemDaLista(postId: number) {
     let lista = this.postagens.filter((item) => item.id != postId);
     this.postagens = lista;
+  }
+
+  carregarMais() {
+    if (this.carregando || this.semMaisPostagens) return;
+
+    this.pagina += 1;
+    this.carregarPostagens();
   }
 }

@@ -13,6 +13,8 @@ export class PostComponent {
   @Input('titulo') titulo: string | undefined;
   @Input('subtitulo') subtitulo: string | undefined;
   @Input('texto') texto: string | undefined;
+  @Input('curtidas') curtidas: number | undefined;
+  @Input('data_insercao') data_insercao: string | undefined;
   @Input('abreviar') abreviar: boolean = false;
 
   constructor(public dialog: MatDialog) {}

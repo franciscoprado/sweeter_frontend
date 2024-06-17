@@ -7,7 +7,7 @@
       <a mat-list-item routerLink="/buscar">Busca</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content (scroll)="atualizarRolagem($event)">
     <mat-toolbar color="primary">
       @if (isHandset$ | async) {
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -19,7 +19,7 @@
 
     <!-- Add Content Here -->
     <section id="conteudo">
-      <router-outlet></router-outlet>
+      <router-outlet (activate)="ativacao($event)"></router-outlet>
     </section>
 
   </mat-sidenav-content>

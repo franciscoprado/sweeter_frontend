@@ -10,8 +10,10 @@ import { environment } from 'src/environments/environment.development';
 export class PostagemService {
   constructor(private http: HttpClient) {}
 
-  obterPostagens(): Observable<Postagens> {
-    return this.http.get<Postagens>(`${environment.url}/postagens`);
+  obterPostagens(pagina: number = 1): Observable<Postagens> {
+    return this.http.get<Postagens>(
+      `${environment.url}/postagens?pagina=${pagina}`
+    );
   }
 
   obterPostagem(postId: number): Observable<Postagem> {
@@ -30,9 +32,9 @@ export class PostagemService {
     );
   }
 
-  buscarPostagens(termo: string): Observable<Postagens> {
+  buscarPostagens(termo: string, pagina: number = 1): Observable<Postagens> {
     return this.http.get<Postagens>(
-      `${environment.url}/busca_postagem?termo=${termo}`
+      `${environment.url}/busca_postagem?termo=${termo}&pagina=${pagina}`
     );
   }
 

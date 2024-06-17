@@ -24,6 +24,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { VisualizacaoComponent } from './paginas/visualizacao/visualizacao.component';
 import { BuscaComponent } from './paginas/busca/busca.component';
 import { MatInputModule } from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatFormField,
     MatLabel,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     provideHttpClient(),

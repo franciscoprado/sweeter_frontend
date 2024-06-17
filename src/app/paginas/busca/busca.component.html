@@ -1,8 +1,8 @@
-<form [formGroup]="buscaForm" (ngSubmit)="buscarTermo()">
+<form [formGroup]="buscaForm" (ngSubmit)="enviar()">
     <p>
         <mat-form-field class="example-full-width">
             <mat-label>Busca</mat-label>
-            <input matInput formControlName="busca" placeholder="Digite aqui o que deseja buscar..." value="">
+            <input matInput formControlName="busca" placeholder="Digite aqui o que deseja buscar..." value="termo">
         </mat-form-field>
         <br>
         <button mat-flat-button color="primary" type="submit" [disabled]="!buscaForm.valid">Buscar</button>
@@ -11,8 +11,13 @@
 
 <div *ngFor="let postagem of postagens">
     <app-post [id]="postagem.id" [titulo]="postagem.titulo" [subtitulo]="postagem.subtitulo" [texto]="postagem.texto"
-        [abreviar]="true"></app-post>
+        [curtidas]="postagem.curtidas" [data_insercao]="postagem.data_insercao" [abreviar]="true"></app-post>
 </div>
 <div *ngIf="semPostagens">
     <p>Nenhuma postagem encontrada.</p>
+</div>
+
+<div class="spinner-container">
+    <mat-spinner role="progressbar" aria-label="progressbar"
+        [style.display]="carregando ? 'block' : 'none'"></mat-spinner>
 </div>

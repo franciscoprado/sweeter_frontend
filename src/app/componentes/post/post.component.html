@@ -15,6 +15,7 @@
         <button mat-icon-button aria-label="Like">
             <mat-icon>favorite</mat-icon>
         </button>
+        <span>{{ curtidas || 0 }}</span>
         <button mat-icon-button aria-label="Edit" [routerLink]="['/editar', id]">
             <mat-icon>edit</mat-icon>
         </button>

@@ -14,7 +14,11 @@ export class BuscaComponent implements OnInit {
     busca: new FormControl('', Validators.required),
   });
   postagens: Postagem[] = [];
+  termo: string = '';
   semPostagens: boolean = false;
+  pagina: number = 1;
+  carregando: boolean = false;
+  semMaisPostagens: boolean = false;
 
   constructor(
     public postagemServico: PostagemService,
@@ -23,41 +27,55 @@ export class BuscaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.termo = '';
     this.activatedRoute.queryParams.subscribe((params) => {
-      const termo = params['termo'];
+      this.termo = params['termo'];
 
-      if (termo) {
-        this.buscarTermo(termo);
+      if (this.termo && !this.carregando) {
+        this.postagens = [];
+        this.buscarTermo();
         return;
       }
-    });
 
-    this.postagens = [];
+      this.postagens = [];
+    });
   }
 
-  buscarTermo(termo: string = '') {
+  enviar() {
     this.postagens = [];
+    this.pagina = 1;
+    this.termo = this.buscaForm.value.busca ?? '';
+    const queryParams: Params = { termo: this.termo };
 
-    if (!termo) {
-      termo = this.buscaForm.value.busca ?? '';
-    }
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams,
+      queryParamsHandling: 'merge', // remove to replace all query params by provided
+    });
+    this.buscarTermo();
+  }
 
-    this.postagemServico.buscarPostagens(termo).subscribe({
+  buscarTermo() {
+    this.carregando = true;
+    this.postagemServico.buscarPostagens(this.termo, this.pagina).subscribe({
       next: (data: Postagens) => {
-        const queryParams: Params = { termo: termo };
-
-        this.router.navigate([], {
-          relativeTo: this.activatedRoute,
-          queryParams,
-          queryParamsHandling: 'merge', // remove to replace all query params by provided
-        });
-        this.postagens = data.postagens;
-        this.semPostagens = this.postagens.length === 0;
+        this.semMaisPostagens = data.postagens.length === 0;
+        this.postagens.push(...data.postagens);
+        this.semPostagens = false;
+        this.carregando = false;
       },
       error: (err) => {
         console.error(err.message);
+        this.carregando = false;
         this.semPostagens = true;
       },
     });
+  }
+
+  carregarMais() {
+    if (this.carregando || this.semMaisPostagens) return;
+
+    this.pagina += 1;
+    this.buscarTermo();
   }
 }
