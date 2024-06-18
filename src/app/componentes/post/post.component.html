@@ -12,7 +12,7 @@
         <button mat-icon-button aria-label="Reply">
             <mat-icon>reply</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Like">
+        <button mat-icon-button aria-label="Like" (click)="curtir(id)">
             <mat-icon>favorite</mat-icon>
         </button>
         <span>{{ curtidas || 0 }}</span>

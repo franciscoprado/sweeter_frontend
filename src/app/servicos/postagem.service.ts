@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Mensagem, Postagem, Postagens } from '../tipos';
@@ -21,8 +21,6 @@ export class PostagemService {
   }
 
   editarPostagem(postagem: FormData): Observable<Postagem> {
-    let httpParams = new HttpHeaders();
-    httpParams = httpParams.set('Content-Type', 'multipart/form-data');
     return this.http.put<Postagem>(`${environment.url}/postagem`, postagem);
   }
 
@@ -39,8 +37,10 @@ export class PostagemService {
   }
 
   criarPostagem(postagem: FormData): Observable<Postagem> {
-    let httpParams = new HttpHeaders();
-    httpParams = httpParams.set('Content-Type', 'multipart/form-data');
     return this.http.post<Postagem>(`${environment.url}/postagem`, postagem);
+  }
+
+  curtirPostagem(postagem: FormData): Observable<Postagem> {
+    return this.http.put<Postagem>(`${environment.url}/curtir`, postagem);
   }
 }
