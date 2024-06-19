@@ -5,8 +5,8 @@
             <mat-card-subtitle [routerLink]="['/post', id]">{{ subtitulo }}</mat-card-subtitle>
         </mat-card-title-group>
     </mat-card-header>
-    <mat-card-content [routerLink]="['/post', id]">
-        {{ (abreviar && texto!!.length > 150) ? (texto | slice:0:150) + '...' : (texto) }}
+    <mat-card-content [routerLink]="['/post', id]"
+        [innerHTML]="(abreviar && texto!!.length > 150) ? (texto | slice:0:150) + '...' : (texto) | postagem">
     </mat-card-content>
     <mat-card-actions>
         <button mat-icon-button aria-label="Reply">

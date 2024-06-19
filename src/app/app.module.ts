@@ -25,39 +25,41 @@ import { VisualizacaoComponent } from './paginas/visualizacao/visualizacao.compo
 import { BuscaComponent } from './paginas/busca/busca.component';
 import { MatInputModule } from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PostagemPipe } from "./pipes/postagem.pipe";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavegacaoComponent,
-    PostComponent,
-    HomeComponent,
-    VisualizacaoComponent,
-    BuscaComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatInputModule,
-    MatProgressSpinnerModule
-  ],
-  providers: [
-    provideHttpClient(),
-    provideAnimationsAsync(),
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline' },
-    },
-  ],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        NavegacaoComponent,
+        PostComponent,
+        HomeComponent,
+        VisualizacaoComponent,
+        BuscaComponent,
+    ],
+    providers: [
+        provideHttpClient(),
+        provideAnimationsAsync(),
+        {
+            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+            useValue: { appearance: 'outline' },
+        },
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        PostagemPipe
+    ]
 })
 export class AppModule {}
