@@ -3,8 +3,9 @@
         [subtitulo]="postagem.subtitulo" [texto]="postagem.texto" [curtidas]="postagem.curtidas"
         [data_insercao]="postagem.data_insercao" [abreviar]="true"></app-post>
 </div>
-<div *ngIf="semPostagens">
-    <p>Nenhuma postagem encontrada.</p>
+
+<div *ngIf="!carregando && postagens.length === 0">
+    <p>Nenhuma postagem inserida até o momento. Clique no botão inferior direito para começar!</p>
 </div>
 
 <button id="adicionar" mat-fab color="primary" aria-label="Adicionar postagem" [routerLink]="['criar']">

@@ -22,7 +22,8 @@ export class EdicaoComponent implements OnInit {
     texto: new FormControl('', Validators.required),
   });
   postagem: Postagem | undefined;
-  
+  tipoResposta: boolean = false;
+
   constructor(
     private postagemServico: PostagemService,
     private route: ActivatedRoute,
@@ -41,6 +42,7 @@ export class EdicaoComponent implements OnInit {
           subtitulo: postagem.subtitulo,
           texto: postagem.texto,
         });
+        this.tipoResposta = postagem.postagem_mae !== null;
       },
       error: (err) => {
         console.error(err.message);

@@ -5,6 +5,7 @@ export interface Postagem {
   texto: string;
   titulo: string;
   curtidas?: number;
+  postagem_mae?: number;
 }
 
 export interface Postagens {

@@ -43,4 +43,8 @@ export class PostagemService {
   curtirPostagem(postagem: FormData): Observable<Postagem> {
     return this.http.put<Postagem>(`${environment.url}/curtir`, postagem);
   }
+
+  obterRespostas(postId: number): Observable<Postagens> {
+    return this.http.get<Postagens>(`${environment.url}/respostas?id=${postId}`);
+  }
 }

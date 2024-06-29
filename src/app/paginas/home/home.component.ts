@@ -9,7 +9,6 @@ import { Postagem, Postagens } from 'src/app/tipos';
 })
 export class HomeComponent implements OnInit {
   postagens: Postagem[] = [];
-  semPostagens: boolean = false;
   pagina: number = 1;
   carregando: boolean = false;
   semMaisPostagens: boolean = false;
@@ -27,11 +26,9 @@ export class HomeComponent implements OnInit {
       next: (data: Postagens) => {
         this.semMaisPostagens = data.postagens.length === 0;
         this.postagens.push(...data.postagens);
-        this.semPostagens = false;
         this.carregando = false;
       },
       error: (err) => {
-        this.semPostagens = true;
         this.carregando = false;
         console.error(err.message);
       },

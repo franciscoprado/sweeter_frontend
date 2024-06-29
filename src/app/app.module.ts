@@ -26,6 +26,7 @@ import { BuscaComponent } from './paginas/busca/busca.component';
 import { MatInputModule } from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PostagemPipe } from "./pipes/postagem.pipe";
+import { RespostaComponent } from './paginas/resposta/resposta.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { PostagemPipe } from "./pipes/postagem.pipe";
         HomeComponent,
         VisualizacaoComponent,
         BuscaComponent,
+        RespostaComponent
     ],
     providers: [
         provideHttpClient(),
