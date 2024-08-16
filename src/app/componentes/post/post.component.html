@@ -8,7 +8,7 @@
     <mat-card-content [routerLink]="['/post', id]"
         [innerHTML]="(abreviar && texto!!.length > 150) ? (texto | slice:0:150) + '...' : (texto) | postagem">
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="sessao$ | async as sessao">
         <button mat-icon-button aria-label="Reply">
             <mat-icon>reply</mat-icon>
         </button>

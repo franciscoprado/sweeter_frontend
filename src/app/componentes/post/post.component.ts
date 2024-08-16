@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ExclusaoComponent } from './modal/exclusao/exclusao.component';
 import { PostagemService } from 'src/app/servicos/postagem.service';
 import { Postagem } from 'src/app/tipos';
+import { SessaoService } from 'src/app/servicos/sessao.service';
 
 @Component({
   selector: 'app-post',
@@ -18,11 +19,15 @@ export class PostComponent {
   @Input('curtidas') curtidas: number | undefined;
   @Input('data_insercao') data_insercao: string | undefined;
   @Input('abreviar') abreviar: boolean = false;
+  sessao$: any;
 
   constructor(
     public dialog: MatDialog,
-    private postagemServico: PostagemService
-  ) {}
+    private postagemServico: PostagemService,
+    private sessaoServico: SessaoService
+  ) {
+    this.sessao$ = this.sessaoServico.getSessao();
+  }
 
   excluirPost(postId: number = 0): void {
     this.dialog.open(ExclusaoComponent, {

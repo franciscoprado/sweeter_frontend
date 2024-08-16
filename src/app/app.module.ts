@@ -20,46 +20,49 @@ import {
   MatFormField,
   MatLabel,
 } from '@angular/material/form-field';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { VisualizacaoComponent } from './paginas/visualizacao/visualizacao.component';
 import { BuscaComponent } from './paginas/busca/busca.component';
 import { MatInputModule } from '@angular/material/input';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { PostagemPipe } from "./pipes/postagem.pipe";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PostagemPipe } from './pipes/postagem.pipe';
+import { httpInterceptor } from './http.interceptor';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavegacaoComponent,
-        PostComponent,
-        HomeComponent,
-        VisualizacaoComponent,
-        BuscaComponent,
-    ],
-    providers: [
-        provideHttpClient(),
-        provideAnimationsAsync(),
-        {
-            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-            useValue: { appearance: 'outline' },
-        },
-    ],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
-        ReactiveFormsModule,
-        MatFormField,
-        MatLabel,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        PostagemPipe
-    ]
+  declarations: [
+    AppComponent,
+    NavegacaoComponent,
+    PostComponent,
+    HomeComponent,
+    VisualizacaoComponent,
+    BuscaComponent,
+  ],
+  providers: [
+    provideHttpClient(
+      withInterceptors([httpInterceptor])
+    ),
+    provideAnimationsAsync(),
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    PostagemPipe,
+  ],
 })
 export class AppModule {}

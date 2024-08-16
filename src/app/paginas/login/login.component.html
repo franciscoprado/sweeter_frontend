@@ -1,0 +1,24 @@
+<form enctype="multipart/form-data" [formGroup]="loginForm" (ngSubmit)="submeter()">
+    <p>
+        <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" type="email">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <mat-label>Senha</mat-label>
+            <input matInput formControlName="senha" type="password">
+        </mat-form-field>
+        <mat-form-field *ngIf="cadastro">
+            <mat-label>Repetir senha</mat-label>
+            <input matInput formControlName="senha2" type="password">
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="cadastro" [ngModelOptions]="{standalone: true}">Não tenho cadastro</mat-checkbox>
+    </p>
+    <p>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">
+            {{ cadastro ? "Cadastrar" :"Login" }}
+        </button>
+    </p>
+</form>

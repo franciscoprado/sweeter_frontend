@@ -14,3 +14,12 @@ export interface Postagens {
 export interface Mensagem {
   mensagem: any;
 }
+
+export interface Sessao {
+  access_token: string;
+}
+
+export interface Login {
+  email: string;
+  senha: string;
+}
