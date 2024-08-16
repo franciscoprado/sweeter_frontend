@@ -1,0 +1,14 @@
+<app-post [id]="postagem?.id" [titulo]="postagem?.titulo" [subtitulo]="postagem?.subtitulo" [texto]="postagem?.texto"
+    [curtidas]="postagem?.curtidas" [abreviar]="true"></app-post>
+
+<form enctype="multipart/form-data" [formGroup]="postForm" (ngSubmit)="enviarResposta()">
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Resposta</mat-label>
+            <textarea matInput formControlName="texto" rows="8"></textarea>
+        </mat-form-field>
+    </p>
+    <p>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!postForm.valid">Enviar</button>
+    </p>
+</form>

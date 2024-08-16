@@ -1,15 +1,15 @@
-<mat-card class="card">
-    <mat-card-header>
+<mat-card class="card" [ngClass]="{'destaque': destaque}">
+    <mat-card-header [routerLink]="['/post', id]">
         <mat-card-title-group>
             <mat-card-title [routerLink]="['/post', id]">{{ titulo }}</mat-card-title>
             <mat-card-subtitle [routerLink]="['/post', id]">{{ subtitulo }}</mat-card-subtitle>
         </mat-card-title-group>
     </mat-card-header>
     <mat-card-content [routerLink]="['/post', id]"
-        [innerHTML]="(abreviar && texto!!.length > 150) ? (texto | slice:0:150) + '...' : (texto) | postagem">
+        [innerHTML]="(abreviar && texto && texto!!.length > 150) ? (texto | slice:0:150) + '...' : (texto) | postagem">
     </mat-card-content>
     <mat-card-actions *ngIf="sessao$ | async as sessao">
-        <button mat-icon-button aria-label="Reply">
+        <button mat-icon-button aria-label="Reply" [routerLink]="['/responder', id]">
             <mat-icon>reply</mat-icon>
         </button>
         <button mat-icon-button aria-label="Like" (click)="curtir(id)">

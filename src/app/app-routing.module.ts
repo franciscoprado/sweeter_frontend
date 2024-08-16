@@ -8,6 +8,7 @@ import { CriacaoComponent } from './paginas/criacao/criacao.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { LogoutComponent } from './paginas/logout/logout.component';
+import { RespostaComponent } from './paginas/resposta/resposta.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'criar', component: CriacaoComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent, canActivate: [authGuard] },
+  { path: 'responder/:postId', component: RespostaComponent },
 ];
 
 @NgModule({

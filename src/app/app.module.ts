@@ -27,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PostagemPipe } from './pipes/postagem.pipe';
 import { httpInterceptor } from './http.interceptor';
+import { RespostaComponent } from './paginas/resposta/resposta.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { httpInterceptor } from './http.interceptor';
     HomeComponent,
     VisualizacaoComponent,
     BuscaComponent,
+        RespostaComponent
   ],
   providers: [
     provideHttpClient(

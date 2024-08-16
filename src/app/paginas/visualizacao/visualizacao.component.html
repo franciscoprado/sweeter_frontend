@@ -1,2 +1,18 @@
-<app-post [id]="postagem?.id" [titulo]="postagem?.titulo" [subtitulo]="postagem?.subtitulo"
-    [texto]="postagem?.texto" [curtidas]="postagem?.curtidas" [abreviar]="false"></app-post>
+<!-- Post mãe -->
+<div *ngIf="postagem?.postagem_mae">
+    <p><small>Postagem principal:</small></p>
+    <app-post [id]="postagemMae?.id" [titulo]="postagemMae?.titulo" [subtitulo]="postagemMae?.subtitulo"
+        [texto]="postagemMae?.texto" [curtidas]="postagemMae?.curtidas" [abreviar]="false"></app-post>
+</div>
+
+<!-- Post principal -->
+<app-post [id]="postagem?.id" [titulo]="postagem?.titulo" [subtitulo]="postagem?.subtitulo" [texto]="postagem?.texto"
+    [curtidas]="postagem?.curtidas" [abreviar]="false" [destaque]="true"></app-post>
+
+<!-- Outras respostas -->
+<div *ngIf="respostas.length">
+    <p><small>Respostas a esta postagem:</small></p>
+    <app-post *ngFor="let resposta of respostas" [id]="resposta?.id" [titulo]="resposta?.titulo"
+        [subtitulo]="resposta?.subtitulo" [texto]="resposta?.texto" [curtidas]="resposta?.curtidas"
+        [abreviar]="false"></app-post>
+</div>
